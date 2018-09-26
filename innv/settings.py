@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'disaster',
+    'places',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +126,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL = '/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+PLACES_MAPS_API_KEY='AIzaSyBKzjwtu-tyyJQtPP3rFPxPRCgtZHgmKfs'
+MAP_WIDGET_HEIGHT=480
+MAP_OPTIONS={}
+MARKER_OPTIONS={}

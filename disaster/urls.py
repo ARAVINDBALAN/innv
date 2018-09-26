@@ -15,6 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
+from .views import HelpView
+app_name='disaster'
+from disaster.views import DisasterDetailsView
 urlpatterns = [
-    path('', views.home,name='index'),
+    path('', views.home,name='home'),
+    path('help/',views.help_page,name='help'),
+    path('notify/',views.notify,name='notify'),
+    path('disasters/<int:pk>',DisasterDetailsView.as_view(),name='disasterdetailview'),
+    path('signup',views.sign_up,name='sign_up')
 ]

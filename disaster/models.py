@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
 from .managers import UserManager
 from django.conf import settings
-
+from places.fields import PlacesField
 state_choices = (("Andhra Pradesh","Andhra Pradesh"),("Arunachal Pradesh ","Arunachal Pradesh "),("Assam","Assam"),("Bihar","Bihar"),("Chhattisgarh","Chhattisgarh"),("Goa","Goa"),("Gujarat","Gujarat"),("Haryana","Haryana"),("Himachal Pradesh","Himachal Pradesh"),("Jammu and Kashmir ","Jammu and Kashmir "),("Jharkhand","Jharkhand"),("Karnataka","Karnataka"),("Kerala","Kerala"),("Madhya Pradesh","Madhya Pradesh"),("Maharashtra","Maharashtra"),("Manipur","Manipur"),("Meghalaya","Meghalaya"),("Mizoram","Mizoram"),("Nagaland","Nagaland"),("Odisha","Odisha"),("Punjab","Punjab"),("Rajasthan","Rajasthan"),("Sikkim","Sikkim"),("Tamil Nadu","Tamil Nadu"),("Telangana","Telangana"),("Tripura","Tripura"),("Uttar Pradesh","Uttar Pradesh"),("Uttarakhand","Uttarakhand"),("West Bengal","West Bengal"),("Andaman and Nicobar Islands","Andaman and Nicobar Islands"),("Chandigarh","Chandigarh"),("Dadra and Nagar Haveli","Dadra and Nagar Haveli"),("Daman and Diu","Daman and Diu"),("Lakshadweep","Lakshadweep"),("National Capital Territory of Delhi","National Capital Territory of Delhi"),("Puducherry","Puducherry"))
 
 
@@ -89,12 +89,22 @@ class Volunteer(models.Model):
         def __str__(self):
             return self.name
 
+class DisasterDetails(models.Model):
+    name = models.CharField(blank=True, max_length=100)
+    description = models.TextField(blank=True)
+    zonemap = models.ImageField(upload_to="zonemap/")
+    dos = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
 
     
 class Help(models.Model):
     name = models.CharField(max_length=200,blank=False,null=False)
-    photo = models.ImageField(upload_to='help_photos/',blank=False,null=False)
     date = models.DateField(auto_now_add=True)
+    photo = models.ImageField(upload_to='help_photo/',blank=True,null=False)
+    location = PlacesField()
 
 class Disasters(models.Model):
     name = models.CharField(max_length=30,blank=False,null=False)
